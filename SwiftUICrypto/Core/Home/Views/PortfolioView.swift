@@ -1,5 +1,5 @@
 //
-//  PortFolioView.swift
+//  PortfolioView.swift
 //  SwiftUICrypto
 //
 //  Created by Taras Prystupa on 11.11.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PortFolioView: View {
+struct PortfolioView: View {
     @EnvironmentObject private var vm: HomeViewModel
     @Environment(\.dismiss) var dismiss
         
@@ -39,6 +39,11 @@ struct PortFolioView: View {
                     trailingNavBarButtons
                 }
             })
+            .onChange(of: vm.searchText, {
+                if vm.searchText.isEmpty {
+                    removeSelectedCoin()
+                }
+            })
             
             .navigationTitle("Edit Portfolio")
         }
@@ -46,23 +51,23 @@ struct PortFolioView: View {
 }
 
 #Preview {
-    PortFolioView()
+    PortfolioView()
         .environmentObject(DeveloperPreview.dev.homeVM)
 }
 
 
-extension PortFolioView {
+extension PortfolioView {
     
     private var coinLogoList: some View {
         ScrollView(.horizontal, showsIndicators: false, content: {
             LazyHStack(spacing: 10) {
-                ForEach(vm.allCoins) { coin in
+                ForEach(vm.searchText.isEmpty ? vm.portfolioCoins : vm.allCoins) { coin in
                     CoinLogoView(coin: coin)
                         .frame(width: 75)
                         .padding(4)
                         .onTapGesture(perform: {
                             withAnimation(.easeIn) {
-                                selectedCoin = coin
+                                updateSelectedCoin(coin: coin)
                             }
                         })
                         .background(
@@ -74,6 +79,17 @@ extension PortFolioView {
             .frame(height: 120)
             .padding(.leading)
         })
+    }
+    
+    private func updateSelectedCoin(coin: CoinModel) {
+        selectedCoin = coin
+        
+        if let portfolioCoin = vm.portfolioCoins.first(where: { $0.id == coin.id }),
+           let amount = portfolioCoin.currentHoldings {
+            quantityText = "\(amount)".returnedLocaleSeparator
+        } else {
+            quantityText = ""
+        }
     }
     
     private var portfolioInputSection: some View {
@@ -128,12 +144,15 @@ extension PortFolioView {
     }
     
     private func saveButtonPressed() {
-        guard let coin = selectedCoin else { return }
+        guard let coin = selectedCoin,
+              let amount = Double(quantityText.preparedToDecimalNumberConversion)
+        else { return }
         
+        print(amount)
         //save to portfolio
+        vm.updatePortfolio(coint: coin, amount: amount)
         
         //show checkmark
-        
         withAnimation {
             showCheckmark = true
             removeSelectedCoin()
@@ -151,6 +170,5 @@ extension PortFolioView {
     private func removeSelectedCoin() {
         selectedCoin = nil
         vm.searchText = ""
-        quantityText = ""
     }
 }

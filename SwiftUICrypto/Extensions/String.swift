@@ -9,8 +9,15 @@ import Foundation
 
 extension String {
     var preparedToDecimalNumberConversion: String {
+        
         split {
             !CharacterSet(charactersIn: "\($0)").isSubset(of: CharacterSet.decimalDigits)
         }.joined(separator: ".")
+    }
+    
+    var returnedLocaleSeparator: String {
+        split {
+            !CharacterSet(charactersIn: "\($0)").isSubset(of: CharacterSet.decimalDigits)
+        }.joined(separator: Locale.current.decimalSeparator ?? ".")
     }
 }

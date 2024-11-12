@@ -1,5 +1,5 @@
 //
-//  CoinDataService.swift
+//  CoinsDataService.swift
 //  SwiftUICrypto
 //
 //  Created by Taras Prystupa on 11.11.2024.
@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-class CoinDataService {
+class CoinsDataService {
     
     @Published var allCoins: [CoinModel] = []
     @Published var marketData: MarketDataModel? = nil
