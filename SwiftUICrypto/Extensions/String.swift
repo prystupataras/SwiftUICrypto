@@ -20,4 +20,8 @@ extension String {
             !CharacterSet(charactersIn: "\($0)").isSubset(of: CharacterSet.decimalDigits)
         }.joined(separator: Locale.current.decimalSeparator ?? ".")
     }
+    
+    var removingHTMLOccurances: String {
+        return self.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+    }
 }
