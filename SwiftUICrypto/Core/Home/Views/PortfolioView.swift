@@ -148,7 +148,6 @@ extension PortfolioView {
               let amount = Double(quantityText.preparedToDecimalNumberConversion)
         else { return }
         
-        print(amount)
         //save to portfolio
         vm.updatePortfolio(coint: coin, amount: amount)
         
