@@ -13,8 +13,8 @@ struct SwiftUICryptoApp: App {
     
     init() {
         //change color for navigation bar
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(Color.theme.accent)]
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(Color.theme.accent)]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(.accent)]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(.accent)]
     }
     
     var body: some Scene {

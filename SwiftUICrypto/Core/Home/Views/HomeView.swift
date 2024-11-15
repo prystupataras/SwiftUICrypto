@@ -21,7 +21,7 @@ struct HomeView: View {
         ZStack {
             
             //background
-            Color.theme.background
+            Color.backgroundApp
                 .ignoresSafeArea()
                 .sheet(isPresented: $showPortfolioView) {
                     PortfolioView()
@@ -89,7 +89,7 @@ extension HomeView {
             Text(showPortfolio ? "Portfolio" : "Live Prices")
                 .font(.headline)
                 .fontWeight(.heavy)
-                .foregroundStyle(Color.theme.accent)
+                .foregroundStyle(.accent)
                 .animation(.none, value: UUID())
             Spacer()
             CircleButtonView(iconName: "chevron.right")
@@ -181,7 +181,7 @@ extension HomeView {
 
         }
         .font(.caption)
-        .foregroundStyle(Color.theme.secondaryText)
+        .foregroundStyle(.secondaryApp)
         .padding(.horizontal)
     }
 }

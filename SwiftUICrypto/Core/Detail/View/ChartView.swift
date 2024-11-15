@@ -22,7 +22,7 @@ struct ChartView: View {
         self.minY = data.min() ?? 0
         
         let priceChange = (data.last ?? 0) - (data.first ?? 0)
-        lineColor = priceChange >= 0 ? Color.theme.green : Color.theme.red
+        lineColor = priceChange >= 0 ? .greenApp : .redApp
         
         endingDate = Date(coinGeckoString: coin.lastUpdated ?? "")
         startingDate = endingDate.addingTimeInterval(-7*24*60*60)
@@ -40,7 +40,7 @@ struct ChartView: View {
             
         }
         .font(.caption)
-        .foregroundStyle(Color.theme.secondaryText)
+        .foregroundStyle(.secondaryApp)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 withAnimation(.linear(duration: 2.0)) {

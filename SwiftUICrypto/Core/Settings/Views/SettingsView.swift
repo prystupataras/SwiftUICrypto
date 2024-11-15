@@ -53,7 +53,7 @@ extension SettingsView {
                 Text("This app was made by following a @SwiftfulThinking cource on YouTube. It uses MVVM Architecture, Combine and CoreData.")
                     .font(.callout)
                     .fontWeight(.medium)
-                    .foregroundStyle(Color.theme.accent)
+                    .foregroundStyle(.accent)
             }
             .padding(.vertical)
             Link("Subscribe on YouTube 🥳", destination: youtubeURL)
@@ -74,7 +74,7 @@ extension SettingsView {
                 Text("The cryprocurrency data that is used in this app comes from a free API from CoinGecko! Prices may be slightly delayed")
                     .font(.callout)
                     .fontWeight(.medium)
-                    .foregroundStyle(Color.theme.accent)
+                    .foregroundStyle(.accent)
             }
             .padding(.vertical)
             Link("Visit CoinGecko 🦎", destination: coingeckoURL)
@@ -94,7 +94,7 @@ extension SettingsView {
                 Text("This app was developed by Taras Prystupa. It uses SwiftUI and is written 100% in Swift. The project benefits from multi-threading, publisher/subscribers and data persistence.")
                     .font(.callout)
                     .fontWeight(.medium)
-                    .foregroundStyle(Color.theme.accent)
+                    .foregroundStyle(.accent)
             }
             .padding(.vertical)
             Link("Visit GitHub 🤓", destination: personalURL)

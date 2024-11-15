@@ -72,7 +72,7 @@ extension PortfolioView {
                         })
                         .background(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(selectedCoin?.id == coin.id ? Color.theme.green : Color.clear, lineWidth: 1)
+                                .stroke(selectedCoin?.id == coin.id ? .greenApp : Color.clear, lineWidth: 1)
                         )
                 }
             }
