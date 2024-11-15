@@ -11,15 +11,12 @@ struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     
     let defaultURL = URL(string: "https://www.google.com")!
-    let youtubeURL = URL(string: "https://www.youtube.com/c/swiftfulthinking")!
-    let coffeeURL = URL(string: "https://www.buymeacoffee.com/nicksarno")!
     let coingeckoURL = URL(string: "https://www.coingecko.com")!
     let personalURL = URL(string: "https://github.com/prystupataras")!
     
     var body: some View {
         NavigationStack {
             List {
-                swiftfulThinkingSection
                 coinGeckoSection
                 developerSection
                 applicationSection
@@ -43,25 +40,6 @@ struct SettingsView: View {
 
 
 extension SettingsView {
-    private var swiftfulThinkingSection: some View {
-        Section {
-            VStack(alignment: .leading) {
-                Image("logo")
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                Text("This app was made by following a @SwiftfulThinking cource on YouTube. It uses MVVM Architecture, Combine and CoreData.")
-                    .font(.callout)
-                    .fontWeight(.medium)
-                    .foregroundStyle(.accent)
-            }
-            .padding(.vertical)
-            Link("Subscribe on YouTube 🥳", destination: youtubeURL)
-            Link("Support his coffee addiction ☕️", destination: coffeeURL)
-        } header: {
-            Text("Swiftful Thinking")
-        }
-    }
     
     private var coinGeckoSection: some View {
         Section {
