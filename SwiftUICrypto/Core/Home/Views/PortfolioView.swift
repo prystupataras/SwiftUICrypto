@@ -30,6 +30,8 @@ struct PortfolioView: View {
                     }
                 }
             }
+            .background(.backgroundApp)
+            .navigationTitle("Edit Portfolio")
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
                     XMarkButton(dismiss: _dismiss)
@@ -44,8 +46,6 @@ struct PortfolioView: View {
                     removeSelectedCoin()
                 }
             })
-            
-            .navigationTitle("Edit Portfolio")
         }
     }
 }

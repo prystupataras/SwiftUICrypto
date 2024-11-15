@@ -15,15 +15,24 @@ struct SettingsView: View {
     let personalURL = URL(string: "https://github.com/prystupataras")!
     
     var body: some View {
-        NavigationStack {
-            List {
-                coinGeckoSection
-                developerSection
-                applicationSection
+        
+        NavigationView {
+            ZStack {
+                Color.backgroundApp
+                    .ignoresSafeArea()
+                List {
+                    coinGeckoSection
+                        .listRowBackground(Color.secondary.opacity(0.1))
+                    developerSection
+                        .listRowBackground(Color.secondary.opacity(0.1))
+                    applicationSection
+                        .listRowBackground(Color.secondary.opacity(0.1))
+                }
             }
+            .scrollContentBackground(.hidden)
             .font(.headline)
             .accentColor(.blue)
-            .listStyle(.grouped)
+            .listStyle(.insetGrouped)
             .navigationTitle("Settings")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -35,7 +44,7 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+        SettingsView()
 }
 
 
@@ -82,7 +91,6 @@ extension SettingsView {
     }
     
     private var applicationSection: some View {
-        
         Section {
             Link("Terms of Service", destination: defaultURL)
             Link("Privacy Policy", destination: defaultURL)
