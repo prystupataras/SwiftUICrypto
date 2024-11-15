@@ -111,7 +111,7 @@ struct CoinDetailModel: Codable {
 
 struct Links: Codable {
     let homepage: [String]?
-    let subredditURL: String?
+    let subredditUrl: String?
 }
 
 struct Description: Codable {

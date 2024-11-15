@@ -22,6 +22,7 @@ struct DetailLoadingView : View {
 struct DetailView: View {
     
     @StateObject var vm: DetailViewModel
+    @State private var showFullDescription: Bool = false
     
     private let columns: [GridItem] = [
         GridItem(.flexible()),
@@ -42,11 +43,13 @@ struct DetailView: View {
                 VStack(spacing: 20) {
                     overviewTitle
                     Divider()
+                    descriptionSection
+                    Divider()
                     overviewGrid
-                    additionalInfo
+                    additionalTitle
                     Divider()
                     additionalInfoGrid
-                    
+                    websiteSection
                 }
                 .padding()
             }
@@ -87,12 +90,36 @@ extension DetailView {
             .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    private var additionalInfo: some View {
+    private var additionalTitle: some View {
         Text("Additional Information")
             .font(.title)
             .bold()
             .foregroundStyle(Color.theme.accent)
             .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private var descriptionSection: some View {
+        ZStack {
+            if let coinDescription = vm.coinDescription, !coinDescription.isEmpty {
+                VStack(alignment: .leading) {
+                    Text(coinDescription)
+                        .lineLimit(showFullDescription ? nil : 3)
+                        .font(.callout)
+                        .foregroundStyle(Color.theme.secondaryText)
+                    Button {
+                        withAnimation(.easeInOut) {
+                            showFullDescription.toggle()
+                        }
+                    } label: {
+                        Text(showFullDescription ? "Less" : "Read more..")
+                    }
+                    .accentColor(.blue)
+                    .font(.caption)
+                    .padding(.vertical, 4)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
     }
     
     private var overviewGrid: some View {
@@ -115,5 +142,22 @@ extension DetailView {
                 StatisticView(stat: stat)
             }
         })
+    }
+    
+    private var websiteSection: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            if let websiteString = vm.websiteURL,
+               let url = URL(string: websiteString) {
+                Link("Website", destination: url)
+            }
+            
+            if let redditString = vm.redditURL,
+               let url = URL(string: redditString) {
+                Link("Reddit", destination: url)
+            }
+        }
+        .accentColor(.blue)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .font(.headline)
     }
 }
